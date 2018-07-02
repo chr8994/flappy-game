@@ -335,4 +335,7 @@ var FlappyGame = function() {
 	//for mobile
 	window.addEventListener('touchstart', onpress);
 	window.addEventListener('load', mobileCheck);
+	$(window).on('reload-game', function() {
+		location.reload();
+	});
 };
