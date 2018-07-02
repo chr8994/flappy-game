@@ -90,8 +90,9 @@ h1.score
   position: absolute;
   top:25%;
   left:50%;
-  width: 20%;
-  margin-left: -10%;
+  width: 17%;
+  transform: translateX(-50%);
+  /* margin-left: -10%; */
 }
 .flappyGame .game_start img
 {

@@ -10,7 +10,6 @@ var FlappyGame = function() {
 		'bird2'     : { src: 'birdy2.png' },
 		'bird3'     : { src: 'birdy3.png' },
 		'ready'     : { src: 'get_ready.png'},
-		'tap'       : { src: 'tap_me.png'},
 		'pipe_up'   : { src: 'pipe_up.png'},
 		'pipe_down' : { src: 'pipe_down.png'}
 	};
@@ -22,20 +21,20 @@ var FlappyGame = function() {
 	var gameStartReady  = document.createElement("div");
 	var getReady 		= document.createElement("div");
 	var getReadyImg 	= document.createElement("img");
-	var tapReady 		= document.createElement("div");
-	var tapReadyImg 	= document.createElement("img");
+	// var tapReady 		= document.createElement("div");
+	// var tapReadyImg 	= document.createElement("img");
 	var footer 			= document.createElement("div");
 	var grass 			= document.createElement("div");
 	var darkSide		= document.createElement("div");
 	var scoreEl 		= document.createElement("h1");
 
-	getReadyImg.src 	= imgPath + assets.ready.src; 
-	gameStart.className = "game_start"; 
+	getReadyImg.src 	= imgPath + assets.ready.src;
+	gameStart.className = "game_start";
 	container.className = "flappyGame";
 	gameStartReady.className = "game_start_ready";
-	tapReady.className  = "tap";
-	tapReadyImg.src 	= imgPath + assets.tap.src;
-	footer.className	= "footer"; 
+	// tapReady.className  = "tap";
+	// tapReadyImg.src 	= imgPath + assets.tap.src;
+	footer.className	= "footer";
 	grass.className		= "grass_is_green";
 	darkSide.className	= "dark_side";
 	scoreEl.className	= "score";
@@ -46,13 +45,13 @@ var FlappyGame = function() {
 	container.appendChild(gameStart);
 	gameStart.appendChild(gameStartReady);
 	gameStartReady.appendChild(getReadyImg);
-	gameStart.appendChild(tapReady);
-	tapReady.appendChild(tapReadyImg);
+	// gameStart.appendChild(tapReady);
+	// tapReady.appendChild(tapReadyImg);
 	container.appendChild(footer);
 	footer.appendChild(grass);
 	grass.appendChild(darkSide);
 
-	//canvas 
+	//canvas
 	var canvas    = document.createElement("canvas");
 	canvas.width  = window_width;
 	canvas.height = window_height - (window_height * .20);
@@ -79,14 +78,14 @@ var FlappyGame = function() {
 			gravity: 0.35,
 			velocity: 0,
 			frame: 0,
-			animation: 1, 
+			animation: 1,
 			rotation: 0,
 			radius: 20,
 			w: 64,
 			h: 64,
 			_jump: 7,
 			update: function() {
-				//increment frame every # frames 
+				//increment frame every # frames
 				var frames = _game.frames;
 				var a = (frames % 9 === 0) ? 1 : 0;
 				this.frame += a;
@@ -105,7 +104,7 @@ var FlappyGame = function() {
 					var cos = (10 * (Math.cos(frames/10)));
 					// console.log(cos);
 					this.y = (canvas.height - fixed) + cos;
-				} 
+				}
 				else if (_game.state == 1) {
 					//flap wings
 					this.animation = (this.frame % 3) + 1;
@@ -126,14 +125,14 @@ var FlappyGame = function() {
 					} else {
 						this.rotation = -0.3;
 					}
-					
-				} 
-				else if (_game.state == 2) 
+
+				}
+				else if (_game.state == 2)
 				{
 					this.velocity += this.gravity;
 					this.y += this.velocity;
 
-					if(this.y >= (canvas.height - bh/2)) 
+					if(this.y >= (canvas.height - bh/2))
 					{
 						//birdy falls
 						this.y = (canvas.height - bh/2);
@@ -148,7 +147,7 @@ var FlappyGame = function() {
 						this.rotation = -0.3;
 					}
 				}
-				
+
 
 			},
 			jump: function() {
@@ -175,7 +174,7 @@ var FlappyGame = function() {
 			offset: 150,
 			reset: function() {
 				this._pipes = [];
-			}, 
+			},
 			update: function() {
 				if(_game.state == 1) {
 					if(_game.frames % _game.pipeOffset == 0) {
@@ -203,8 +202,8 @@ var FlappyGame = function() {
 
 							var cx  = Math.min(Math.max(_game.bird.x, pipe.x), pipe.x + _game.pipes.width);
 							var cy1 = Math.min(Math.max(_game.bird.y, pipe.y), pipe.y + _game.pipes.height);
-							var cy2 = Math.min(Math.max(_game.bird.y, pipe.y + _game.pipes.height + _game.pipes.offset), pipe.y + (2 * _game.pipes.height) + _game.pipes.offset) 
-							
+							var cy2 = Math.min(Math.max(_game.bird.y, pipe.y + _game.pipes.height + _game.pipes.offset), pipe.y + (2 * _game.pipes.height) + _game.pipes.offset)
+
 							var dx = _game.bird.x - cx;
 							var dy1 = _game.bird.y - cy1;
 							var dy2 = _game.bird.y - cy2;
@@ -225,8 +224,8 @@ var FlappyGame = function() {
 							len--;
 						}
 					}
-				}  
-				
+				}
+
 			},
 			draw: 	function(ctx) {
 				var len    = this._pipes.length;
@@ -249,20 +248,20 @@ var FlappyGame = function() {
 				grass.style.WebkitAnimation = "none";
 				grass.style.animation = "none";
 			}
-		},	
+		},
 		draw: function() {
 			//draw all elements on canvas
 			_game.clear();
 			_game.pipes.draw(context);
-			_game.bird.draw(context); 
+			_game.bird.draw(context);
 		},
 		clear: function() {
 			//clear the canvas
-			context.clearRect(0, 0, 
-				canvas.width, 
+			context.clearRect(0, 0,
+				canvas.width,
 				canvas.height);
 		},
-		loop: function() {	
+		loop: function() {
 			//game loop
 			_game.update();
 			_game.draw();
@@ -276,13 +275,13 @@ var FlappyGame = function() {
 
 
 	function onpress(e) {
-		
+
 		e.preventDefault();
 		e.stopPropagation();
 
 		//hide on tap
 		if(_game.state === 0) {
-			tapReadyImg.style.opacity = "0";
+			// tapReadyImg.style.opacity = "0";
 			getReadyImg.style.opacity = "0";
 			//load assets
 			_game.state = 1;
@@ -291,6 +290,10 @@ var FlappyGame = function() {
 		else if(_game.state == 1) {
 			_game.bird.jump();
 		}
+		else if(_game.state == 2) {
+			 location.reload();
+		}
+
 	}
 	function updateCount() {
 		var score = _game.score;
